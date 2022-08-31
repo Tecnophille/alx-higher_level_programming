@@ -9,7 +9,7 @@
  * @next: points to the next node
  *
  * Description: singly linked list node structure
- * for Holberton project
+ * in this project 
  */
 typedef struct listint_s
 {
