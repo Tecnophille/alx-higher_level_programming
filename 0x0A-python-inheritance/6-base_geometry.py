@@ -1,5 +1,9 @@
 #!/usr/bin/python3
+""" New class Geometry module """
+
+
 class BaseGeometry:
-    """ Empty class """
+    """ Base Geometry """
+
     def area(self):
         raise Exception("area() is not implemented")
