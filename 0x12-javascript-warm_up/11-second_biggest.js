@@ -1,20 +1,13 @@
 #!/usr/bin/node
 
-let biggest = 0;
-let i;
-const arrayNumbers = [];
+const { argv } = require('process');
+const args = argv.slice(2);
+let result = 0;
+let finalArray = [];
 
-for (i = 2; i < process.argv.length; i++) {
-  if (Number.isNaN(parseInt(process.argv[i])) === false) {
-    arrayNumbers[i - 2] = parseInt(process.argv[i]);
-  }
+if (args.length > 1) {
+  finalArray = [...new Set(args.map((e) => parseInt(e)).sort((a, b) => b - a))];
+  result = finalArray.length > 1 ? finalArray[1] : finalArray[0];
 }
 
-if (arrayNumbers.length > 1) {
-  biggest = Math.max.apply(null, arrayNumbers);
-  i = arrayNumbers.indexOf(biggest);
-  arrayNumbers[i] = -Infinity;
-  biggest = Math.max.apply(null, arrayNumbers);
-}
-
-console.log(biggest);
+console.log(result);
