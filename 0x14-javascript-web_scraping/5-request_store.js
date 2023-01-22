@@ -1,9 +1,7 @@
 #!/usr/bin/node
-const request = require('request');
-const fs = require('fs');
 
-request(process.argv[2], function (err, response, body) {
-  if (err == null) {
-    fs.writeFileSync(process.argv[3], body);
-  }
-});
+const url = process.argv[2];
+const filename = process.argv[3];
+const fs = require('fs');
+const request = require('request');
+request(url).pipe(fs.createWriteStream(filename));

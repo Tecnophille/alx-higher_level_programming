@@ -1,19 +1,24 @@
 #!/usr/bin/node
-const request = require('request');
-let nFilms = 0;
 
-request(process.argv[2], function (err, response, body) {
-  if (err == null) {
-    const resp = JSON.parse(body);
-    const results = resp.results;
-    for (let i = 0; i < results.length; i++) {
-      const characters = results[i].characters;
-      for (let j = 0; j < characters.length; j++) {
-        if (characters[j].search('18') > 0) {
-          nFilms++;
+const url = process.argv[2];
+const request = require('request');
+
+request(url, function (err, response, body) {
+  if (err) {
+    console.log(err);
+  } else if (response.statusCode === 200) {
+    const films = JSON.parse(body).results;
+    let count = 0;
+    for (const i in films) {
+      const chars = films[i].characters;
+      for (const c in chars) {
+        if (chars[c].includes('18')) {
+          count++;
         }
       }
     }
+    console.log(count);
+  } else {
+    console.log('Erorr Code:' + response.statusCode);
   }
-  console.log(nFilms);
 });
